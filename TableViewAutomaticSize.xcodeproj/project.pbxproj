@@ -14,6 +14,7 @@
 		09D298611A8550EE0006FADB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09D298601A8550EE0006FADB /* Images.xcassets */; };
 		09D298641A8550EE0006FADB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09D298621A8550EE0006FADB /* LaunchScreen.xib */; };
 		09D298701A8550EE0006FADB /* TableViewAutomaticSizeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D2986F1A8550EE0006FADB /* TableViewAutomaticSizeTests.m */; };
+		09D2987B1A85518F0006FADB /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D2987A1A85518F0006FADB /* CustomTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		09D298691A8550EE0006FADB /* TableViewAutomaticSizeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableViewAutomaticSizeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09D2986E1A8550EE0006FADB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09D2986F1A8550EE0006FADB /* TableViewAutomaticSizeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewAutomaticSizeTests.m; sourceTree = "<group>"; };
+		09D298791A85518F0006FADB /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		09D2987A1A85518F0006FADB /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				09D298601A8550EE0006FADB /* Images.xcassets */,
 				09D298621A8550EE0006FADB /* LaunchScreen.xib */,
 				09D298531A8550EE0006FADB /* Supporting Files */,
+				09D298791A85518F0006FADB /* CustomTableViewCell.h */,
+				09D2987A1A85518F0006FADB /* CustomTableViewCell.m */,
 			);
 			path = TableViewAutomaticSize;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 			files = (
 				09D2985C1A8550EE0006FADB /* ViewController.m in Sources */,
 				09D298591A8550EE0006FADB /* AppDelegate.m in Sources */,
+				09D2987B1A85518F0006FADB /* CustomTableViewCell.m in Sources */,
 				09D298561A8550EE0006FADB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
