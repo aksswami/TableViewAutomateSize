@@ -10,6 +10,7 @@
 
 @interface CustomTableViewCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel * textLabel;
+@property (nonatomic, weak) IBOutlet UILabel * titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel * subtitleLabel;
 
 @end

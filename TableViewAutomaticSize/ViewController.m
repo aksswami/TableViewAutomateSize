@@ -31,7 +31,7 @@
     self.textArray = [[NSMutableArray alloc]init];
     for (int i = 0; i < 10; i++) {
         int r = arc4random_uniform(25);
-        NSString * strLabel = @"";
+        NSString * strLabel = self.str;
         for (int j = 0; j < r; j++) {
             strLabel = [strLabel stringByAppendingString:self.str];
         }
@@ -40,8 +40,6 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.estimatedRowHeight = 44.0f;
-    //self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     // Do any additional setup after loading the view, typically from a nib.
@@ -64,35 +62,48 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CustomTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CustomTableCellIdentifier" forIndexPath:indexPath];
-    int r = arc4random_uniform(25);
-    NSString * strLabel = @"";
-    for (int i = 0; i < r; i++) {
-        strLabel = [strLabel stringByAppendingString:self.str];
-    }
-    cell.textLabel.text = strLabel;
+    cell.titleLabel.text = self.str;
+    cell.subtitleLabel.text = self.textArray[indexPath.row];
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (SYSTEM_VERSION_LESS_THAN(@"8.0"))  //iOS7 or less
-    {
-        static UILabel* label;
-        
-        if (!label) {
-            label = [[ UILabel alloc]
-                     initWithFrame:CGRectMake(0,0, FLT_MAX, FLT_MAX)];
-            label.text = self.textArray[indexPath.row];
-        }
-        
-        label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-        [label sizeToFit];
-        return label.frame.size.height * 2;
-    }
-    else // iOS8 part
-    {
-        return UITableViewAutomaticDimension;
-    }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self heightForBasicCellAtIndexPath:indexPath];
 }
+
+- (CGFloat)heightForBasicCellAtIndexPath:(NSIndexPath *)indexPath {
+    static CustomTableViewCell *sizingCell = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sizingCell = [self.tableView dequeueReusableCellWithIdentifier:@"CustomTableCellIdentifier"];
+    });
+    
+    [self configureBasicCell:sizingCell atIndexPath:indexPath];
+    return [self calculateHeightForConfiguredSizingCell:sizingCell];
+}
+
+- (void)configureBasicCell:(CustomTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    [cell.textLabel setText:self.str];
+    [cell.subtitleLabel setText:self.textArray[indexPath.row]];
+}
+
+
+- (CGFloat)calculateHeightForConfiguredSizingCell:(CustomTableViewCell *)sizingCell {
+    
+    sizingCell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.frame), CGRectGetHeight(sizingCell.bounds));
+    
+    [sizingCell setNeedsLayout];
+    [sizingCell layoutIfNeeded];
+
+    CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height + 1.0f; // Add 1.0f for the cell separator height
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100.0f;
+}
+
 
 @end
